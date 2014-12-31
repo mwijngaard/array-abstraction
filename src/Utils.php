@@ -95,7 +95,7 @@ class Utils
         if (is_array($val)) {
             return new \ArrayIterator($val);
         } elseif (is_object($val)) {
-            if ($val instanceof ProxyInterface) {
+            if ($val instanceof \IteratorAggregate) {
                 return $val->getIterator();
             } elseif ($val instanceof \Traversable) {
                 return new \IteratorIterator($val);
