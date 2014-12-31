@@ -6,6 +6,12 @@ use mwijngaard\ArrayAbstraction\Exception\NotSupportedOnObjectException;
 use mwijngaard\ArrayAbstraction\Exception\NotSupportedOnTypeException;
 use mwijngaard\ArrayAbstraction\Proxy\ProxyInterface;
 
+/**
+ * Class Utils
+ * @package mwijngaard\ArrayAbstraction
+ *
+ * Contains all the array-related functionality that we're trying to replace.
+ */
 class Utils {
 	public static function offsetGet($val, $offset) {
 		if (is_array($val)) {
