@@ -1,0 +1,15 @@
+{
+  "name": "mwijngaard/ArrayAbstraction",
+  "description": "Abstraction for native arrays and objects implementing ArrayAccess/Iterator/Countable interfaces",
+  "minimum-stability": "dev",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Merijn Wijngaard",
+      "email": "mwijngaard@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {"mwijngaard\\ArrayAbstraction\\": "src/"}
+  }
+}
