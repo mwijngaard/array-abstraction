@@ -115,11 +115,7 @@ class Utils
             if ($val instanceof \Countable) {
                 return count($val);
             } elseif ($val instanceof \Traversable) {
-                $ctr = 0;
-                foreach ($val as $value) {
-                    $ctr++;
-                }
-                return $ctr;
+                return iterator_count($val);
             } else {
                 throw new NotSupportedOnObjectException($val);
             }
