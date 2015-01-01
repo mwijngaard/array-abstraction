@@ -1,5 +1,7 @@
-array-abstraction
+ArrayAbstraction
 ================
+
+[![Build Status](https://travis-ci.org/mwijngaard/array-abstraction.svg?branch=master)](https://travis-ci.org/mwijngaard/array-abstraction)
 
 Abstraction for built-in arrays and objects implementing ArrayAccess/Iterator/Countable interfaces.
 
