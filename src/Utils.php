@@ -27,7 +27,7 @@ class Utils
                         return $value;
                     }
                 }
-                // TODO: should this be an OutOfBoundsException?
+                // Should this be an OutOfBoundsException?
                 trigger_error(sprintf("Undefined offset: %s", $offset), E_NOTICE);
                 return null;
             } else {
