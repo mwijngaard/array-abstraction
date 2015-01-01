@@ -333,4 +333,26 @@ class Utils
 
         return array_count_values($array);
     }
+
+
+
+    public static function values($val)
+    {
+        if (is_array($val)) {
+            $array = $val;
+        } elseif (is_object($val)) {
+            if ($val instanceof ProxyInterface) {
+                return $val->values();
+            } elseif ($val instanceof \Traversable) {
+                $array = iterator_to_array($val);
+            } else {
+                throw new NotSupportedOnObjectException($val);
+            }
+        } else {
+            throw new NotSupportedOnTypeException($val);
+        }
+
+        return array_values($array);
+    }
+
 }
