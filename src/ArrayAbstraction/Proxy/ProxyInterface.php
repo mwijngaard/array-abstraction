@@ -39,11 +39,26 @@ interface ProxyInterface extends \ArrayAccess, \IteratorAggregate, \Countable
     public function column($column_key, $index_key = null);
 
     /**
+     * @param array|\Traversable $values_val
+     * @return array
+     */
+    public function combine($values_val);
+
+    /**
      * Counts all the values of an array
      *
      * @return int[]
      */
     public function countValues();
+
+    /**
+     * Computes the difference of arrays with additional index check
+     *
+     * @param $val2
+     * @return mixed
+     */
+    public function diffAssoc($val2);
+
 
     /**
      * Return all values (reindexed)

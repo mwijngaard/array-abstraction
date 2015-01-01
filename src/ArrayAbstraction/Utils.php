@@ -284,7 +284,7 @@ class Utils
             $keys_array = $keys_val;
         } elseif (is_object($keys_val)) {
             if ($keys_val instanceof ProxyInterface) {
-                $keys_array = $keys_val->values();
+                return $keys_val->combine($values_val);
             } elseif ($keys_val instanceof \Traversable) {
                 $keys_array = iterator_to_array($keys_val);
             } else {
@@ -332,6 +332,39 @@ class Utils
         }
 
         return array_count_values($array);
+    }
+
+    public static function arrayDiffAssoc($val1, $val2)
+    {
+        if (is_array($val1)) {
+            $array1 = $val1;
+        } elseif (is_object($val1)) {
+            if ($val1 instanceof ProxyInterface) {
+                return $val1->diffAssoc($val2);
+            } elseif ($val2 instanceof \Traversable) {
+                $array1 = iterator_to_array($val1);
+            } else {
+                throw new NotSupportedOnObjectException($val1);
+            }
+        } else {
+            throw new NotSupportedOnTypeException($val1);
+        }
+
+        if (is_array($val2)) {
+            $array2 = $val2;
+        } elseif (is_object($val2)) {
+            if ($val2 instanceof ProxyInterface) {
+                $array2 = $val2->values();
+            } elseif ($val2 instanceof \Traversable) {
+                $array2 = iterator_to_array($val2);
+            } else {
+                throw new NotSupportedOnObjectException($val2);
+            }
+        } else {
+            throw new NotSupportedOnTypeException($val2);
+        }
+
+        return array_diff_assoc($array1, $array2);
     }
 
 

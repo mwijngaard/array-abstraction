@@ -96,7 +96,23 @@ class BaseProxy implements ProxyInterface
     /**
      * @inherit
      */
+    public function combine($values_val)
+    {
+        throw new NotImplementedException();
+    }
+
+    /**
+     * @inherit
+     */
     public function countValues()
+    {
+        throw new NotImplementedException();
+    }
+
+    /**
+     * @inherit
+     */
+    public function diffAssoc($val2)
     {
         throw new NotImplementedException();
     }
