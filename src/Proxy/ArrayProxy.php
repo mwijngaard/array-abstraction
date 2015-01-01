@@ -81,4 +81,20 @@ class ArrayProxy implements ProxyInterface
     {
         return new static(array_change_key_case($this->container, $case));
     }
+
+    /**
+     * @inherit
+     */
+    public function chunk($size, $preserve_keys = false)
+    {
+        return array_chunk($this->container, $size, $preserve_keys);
+    }
+
+    /**
+     * @inherit
+     */
+    public function column($column_key, $index_key = null)
+    {
+        return array_column($this->container, $column_key, $index_key);
+    }
 }

@@ -76,4 +76,20 @@ class BaseProxy implements ProxyInterface
     {
         throw new NotImplementedException();
     }
+
+    /**
+     * @inherit
+     */
+    public function chunk($size, $preserve_keys = false)
+    {
+        throw new NotImplementedException();
+    }
+
+    /**
+     * @inherit
+     */
+    public function column($column_key, $index_key = null)
+    {
+        throw new NotImplementedException();
+    }
 }

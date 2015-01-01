@@ -27,7 +27,7 @@ class Utils
                         return $value;
                     }
                 }
-                // should this be an OutOfBoundsException?
+                // TODO: should this be an OutOfBoundsException?
                 trigger_error(sprintf("Undefined offset: %s", $offset), E_NOTICE);
                 return null;
             } else {
@@ -110,10 +110,10 @@ class Utils
     public static function count($val)
     {
         if (is_array($val)) {
-            return count($val);
+            $var = $val;
         } elseif (is_object($val)) {
             if ($val instanceof \Countable) {
-                return count($val);
+                $var = $val;
             } elseif ($val instanceof \Traversable) {
                 return iterator_count($val);
             } else {
@@ -122,41 +122,83 @@ class Utils
         } else {
             throw new NotSupportedOnTypeException($val);
         }
+
+        return count($var);
     }
 
     public static function implode($glue, $val)
     {
         if (is_array($val)) {
-            return implode($glue, $val);
+            $array = $val;
         } elseif (is_object($val)) {
             if ($val instanceof ProxyInterface) {
                 return $val->implode($glue);
             } elseif ($val instanceof \Traversable) {
-                $pieces = iterator_to_array($val);
-                return implode($glue, $pieces);
+                $array = iterator_to_array($val);
             } else {
                 throw new NotSupportedOnObjectException($val);
             }
         } else {
             throw new NotSupportedOnTypeException($val);
         }
+
+        return implode($glue, $array);
     }
 
     public static function changeKeyKase($val, $case = CASE_LOWER)
     {
         if (is_array($val)) {
-            return array_change_key_case($val, $case);
+            $array = $val;
         } elseif (is_object($val)) {
             if ($val instanceof ProxyInterface) {
                 return $val->changeKeyCase($case);
             } elseif ($val instanceof \Traversable) {
                 $array = iterator_to_array($val);
-                return array_change_key_case($array, $case);
             } else {
                 throw new NotSupportedOnObjectException($val);
             }
         } else {
             throw new NotSupportedOnTypeException($val);
         }
+
+        return array_change_key_case($array, $case);
+    }
+
+    public static function chunk($val, $size, $preserve_keys = false)
+    {
+        if (is_array($val)) {
+            $array = $val;
+        } elseif (is_object($val)) {
+            if ($val instanceof ProxyInterface) {
+                return $val->chunk($size, $preserve_keys);
+            } elseif ($val instanceof \Traversable) {
+                $array = iterator_to_array($val);
+            } else {
+                throw new NotSupportedOnObjectException($val);
+            }
+        } else {
+            throw new NotSupportedOnTypeException($val);
+        }
+
+        return array_chunk($array, $size, $preserve_keys);
+    }
+
+    public static function column($val, $column_key, $index_key = null)
+    {
+        if (is_array($val)) {
+            $array = $val;
+        } elseif (is_object($val)) {
+            if ($val instanceof ProxyInterface) {
+                return $val->column($column_key, $index_key);
+            } elseif ($val instanceof \Traversable) {
+                $array = iterator_to_array($val);
+            } else {
+                throw new NotSupportedOnObjectException($val);
+            }
+        } else {
+            throw new NotSupportedOnTypeException($val);
+        }
+
+        return array_column($array, $column_key, $index_key);
     }
 }
