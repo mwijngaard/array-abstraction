@@ -1,4 +1,4 @@
-ArrayAbstraction
+array-abstraction
 ================
 
 Abstraction for built-in arrays and objects implementing ArrayAccess/Iterator/Countable interfaces.
