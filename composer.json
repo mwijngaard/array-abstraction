@@ -1,6 +1,9 @@
 {
   "name": "mwijngaard/array-abstraction",
+  "type": "library",
   "description": "Abstraction for native arrays and objects implementing ArrayAccess/Iterator/Countable interfaces",
+  "keywords": [ "array", "abstraction", "iterator", "collection" ],
+  "homepage": "https://github.com/mwijngaard/array-abstraction",
   "minimum-stability": "stable",
   "license": "MIT",
   "authors": [
@@ -10,7 +13,9 @@
     }
   ],
   "autoload": {
-    "psr-4": {"mwijngaard\\": "src/"}
+    "psr-4": {
+      "mwijngaard\\": "src/"
+    }
   },
   "require": {
     "php": ">=5.5"
