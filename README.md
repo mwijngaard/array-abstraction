@@ -2,6 +2,7 @@ ArrayAbstraction
 ================
 
 [![Build Status](https://travis-ci.org/mwijngaard/array-abstraction.svg?branch=master)](https://travis-ci.org/mwijngaard/array-abstraction)
+[![Coverage Status](https://img.shields.io/coveralls/mwijngaard/array-abstraction.svg)](https://coveralls.io/r/mwijngaard/array-abstraction)
 
 Abstraction for built-in arrays and objects implementing ArrayAccess/Iterator/Countable interfaces.
 
