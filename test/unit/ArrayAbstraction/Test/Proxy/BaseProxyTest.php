@@ -20,6 +20,8 @@ class BaseProxyTest extends \PHPUnit_Framework_TestCase
             array('changeKeyCase', array(CASE_UPPER)),
             array('chunk', array(2, true)),
             array('column', array('age', 'name')),
+
+            array('values', array()),
         );
     }
 

@@ -201,4 +201,38 @@ class Utils
 
         return array_column($array, $column_key, $index_key);
     }
+
+    public static function combine($keys_val, $values_val)
+    {
+        if (is_array($keys_val)) {
+            $keys_array = $keys_val;
+        } elseif (is_object($keys_val)) {
+            if ($keys_val instanceof ProxyInterface) {
+                $keys_array = $keys_val->values();
+            } elseif ($keys_val instanceof \Traversable) {
+                $keys_array = iterator_to_array($keys_val);
+            } else {
+                throw new NotSupportedOnObjectException($keys_val);
+            }
+        } else {
+            throw new NotSupportedOnTypeException($keys_val);
+        }
+
+        if (is_array($values_val)) {
+            $values_array = $values_val;
+        } elseif (is_object($values_val)) {
+            if ($values_val instanceof ProxyInterface) {
+                $values_array = $values_val->values();
+            } elseif ($values_val instanceof \Traversable) {
+                $values_array = iterator_to_array($values_val);
+            } else {
+                throw new NotSupportedOnObjectException($values_val);
+            }
+        } else {
+            throw new NotSupportedOnTypeException($values_val);
+        }
+
+        return array_combine($keys_array, $values_array);
+    }
+
 }

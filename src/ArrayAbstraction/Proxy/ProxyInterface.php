@@ -37,4 +37,13 @@ interface ProxyInterface extends \ArrayAccess, \IteratorAggregate, \Countable
      * @return mixed[]
      */
     public function column($column_key, $index_key = null);
+
+
+
+    /**
+     * Return all values (reindexed)
+     *
+     * @return mixed[]
+     */
+    public function values();
 }

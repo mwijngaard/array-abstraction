@@ -39,6 +39,7 @@ class ArrayProxyTest extends \PHPUnit_Framework_TestCase
                 'John' => 23,
                 'Jane' => 22
             )),
+            array($string_key_array, 'values', array(), array(0, 1, 2))
         );
     }
 
