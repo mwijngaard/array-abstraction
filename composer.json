@@ -10,13 +10,13 @@
     }
   ],
   "autoload": {
-    "psr-4": {"mwijngaard\\ArrayAbstraction\\": "src/"}
+    "psr-4": {"mwijngaard\\": "src/"}
   },
   "require": {
     "php": ">=5.5"
   },
   "require-dev": {
     "phpunit/phpunit": "~4.4",
-    "squizlabs/php_codesniffer": "~2.1"
+    "squizlabs/php_codesniffer": "~2.0"
   }
 }

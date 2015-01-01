@@ -13,17 +13,9 @@ class ArrayProxy implements ProxyInterface
 {
     protected $container;
 
-    public function __construct($container = array())
+    public function __construct(array $container = array())
     {
         $this->container = $container;
-    }
-
-    /**
-     * @inherit
-     */
-    public function offsetGet($offset)
-    {
-        return $this->container[$offset];
     }
 
     /**
@@ -32,6 +24,14 @@ class ArrayProxy implements ProxyInterface
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
+    }
+
+    /**
+     * @inherit
+     */
+    public function offsetGet($offset)
+    {
+        return $this->container[$offset];
     }
 
     /**
