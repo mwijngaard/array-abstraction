@@ -1,5 +1,5 @@
 {
-  "name": "mwijngaard/ArrayAbstraction",
+  "name": "mwijngaard/array-abstraction",
   "description": "Abstraction for native arrays and objects implementing ArrayAccess/Iterator/Countable interfaces",
   "minimum-stability": "stable",
   "license": "MIT",
