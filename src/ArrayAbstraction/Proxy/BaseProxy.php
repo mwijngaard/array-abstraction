@@ -93,6 +93,14 @@ class BaseProxy implements ProxyInterface
         throw new NotImplementedException();
     }
 
+    /**
+     * @inherit
+     */
+    public function countValues()
+    {
+        throw new NotImplementedException();
+    }
+
 
 
     /**

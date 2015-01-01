@@ -14,6 +14,42 @@ use mwijngaard\ArrayAbstraction\Proxy\ProxyInterface;
  */
 class Utils
 {
+    /**
+     * Whether a offset exists
+     *
+     * @param array|\ArrayAccess|\Traversable $val
+     * @param $offset
+     * @return bool
+     */
+    public static function offsetExists($val, $offset)
+    {
+        if (is_array($val)) {
+            return isset($val[$offset]);
+        } elseif (is_object($val)) {
+            if ($val instanceof \ArrayAccess) {
+                return isset($val[$offset]);
+            } elseif ($val instanceof \Traversable) {
+                foreach ($val as $key => $value) {
+                    if ($key === $offset && $value !== null) {
+                        return true;
+                    }
+                }
+                return false;
+            } else {
+                throw new NotSupportedOnObjectException($val);
+            }
+        } else {
+            throw new NotSupportedOnTypeException($val);
+        }
+    }
+
+    /**
+     * Offset to retrieve
+     *
+     * @param array|\ArrayAccess|\Traversable $val
+     * @param mixed $offset
+     * @return mixed
+     */
     public static function offsetGet($val, $offset)
     {
         if (is_array($val)) {
@@ -38,28 +74,13 @@ class Utils
         }
     }
 
-    public static function offsetExists($val, $offset)
-    {
-        if (is_array($val)) {
-            return isset($val[$offset]);
-        } elseif (is_object($val)) {
-            if ($val instanceof \ArrayAccess) {
-                return isset($val[$offset]);
-            } elseif ($val instanceof \Traversable) {
-                foreach ($val as $key => $value) {
-                    if ($key === $offset && $value !== null) {
-                        return true;
-                    }
-                }
-                return false;
-            } else {
-                throw new NotSupportedOnObjectException($val);
-            }
-        } else {
-            throw new NotSupportedOnTypeException($val);
-        }
-    }
-
+    /**
+     * Offset to set
+     *
+     * @param array|\ArrayAccess $val
+     * @param mixed $offset
+     * @param mixed $value
+     */
     public static function offsetSet($val, $offset, $value)
     {
         if (is_array($val)) {
@@ -75,6 +96,12 @@ class Utils
         }
     }
 
+    /**
+     * Offset to unset
+     *
+     * @param array|\ArrayAccess $val
+     * @param mixed $offset
+     */
     public static function offsetUnset($val, $offset)
     {
         if (is_array($val)) {
@@ -90,6 +117,12 @@ class Utils
         }
     }
 
+    /**
+     * Retrieve an external iterator
+     *
+     * @param array|\Traversable $val
+     * @return \Traversable
+     */
     public static function getIterator($val)
     {
         if (is_array($val)) {
@@ -107,6 +140,12 @@ class Utils
         }
     }
 
+    /**
+     * Count elements of an object
+     *
+     * @param array|\Countable|\Traversable $val
+     * @return int
+     */
     public static function count($val)
     {
         if (is_array($val)) {
@@ -126,6 +165,13 @@ class Utils
         return count($var);
     }
 
+    /**
+     * Join array elements with a string
+     *
+     * @param string $glue
+     * @param array|\Traversable $val
+     * @return string
+     */
     public static function implode($glue, $val)
     {
         if (is_array($val)) {
@@ -145,6 +191,13 @@ class Utils
         return implode($glue, $array);
     }
 
+    /**
+     * Changes the case of all keys in an array
+     *
+     * @param array|\Traversable $val
+     * @param int $case
+     * @return array
+     */
     public static function changeKeyKase($val, $case = CASE_LOWER)
     {
         if (is_array($val)) {
@@ -164,6 +217,14 @@ class Utils
         return array_change_key_case($array, $case);
     }
 
+    /**
+     * Split an array into chunks
+     *
+     * @param array|\Traversable $val
+     * @param int $size
+     * @param bool $preserve_keys
+     * @return array
+     */
     public static function chunk($val, $size, $preserve_keys = false)
     {
         if (is_array($val)) {
@@ -183,6 +244,14 @@ class Utils
         return array_chunk($array, $size, $preserve_keys);
     }
 
+    /**
+     * Return the values from a single column in the input array
+     *
+     * @param array|\Traversable $val
+     * @param mixed $column_key
+     * @param mixed $index_key
+     * @return array
+     */
     public static function column($val, $column_key, $index_key = null)
     {
         if (is_array($val)) {
@@ -202,6 +271,13 @@ class Utils
         return array_column($array, $column_key, $index_key);
     }
 
+    /**
+     * Creates an array by using one array for keys and another for its values
+     *
+     * @param array|\Traversable $keys_val
+     * @param array|\Traversable $values_val
+     * @return array
+     */
     public static function combine($keys_val, $values_val)
     {
         if (is_array($keys_val)) {
@@ -235,4 +311,26 @@ class Utils
         return array_combine($keys_array, $values_array);
     }
 
+    /**
+     * @param array|\Traversable $val
+     * @return array
+     */
+    public static function countValues($val)
+    {
+        if (is_array($val)) {
+            $array = $val;
+        } elseif (is_object($val)) {
+            if ($val instanceof ProxyInterface) {
+                return $val->countValues();
+            } elseif ($val instanceof \Traversable) {
+                $array = iterator_to_array($val);
+            } else {
+                throw new NotSupportedOnObjectException($val);
+            }
+        } else {
+            throw new NotSupportedOnTypeException($val);
+        }
+
+        return array_count_values($array);
+    }
 }

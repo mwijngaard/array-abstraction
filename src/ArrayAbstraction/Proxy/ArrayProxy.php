@@ -98,6 +98,14 @@ class ArrayProxy implements ProxyInterface
         return array_column($this->container, $column_key, $index_key);
     }
 
+    /**
+     * @inherit
+     */
+    public function countValues()
+    {
+        return array_count_values($this->container);
+    }
+
 
 
     /**

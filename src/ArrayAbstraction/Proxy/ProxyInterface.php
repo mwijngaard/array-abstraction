@@ -16,7 +16,7 @@ interface ProxyInterface extends \ArrayAccess, \IteratorAggregate, \Countable
      * Changes the case of all keys
      *
      * @param $case
-     * @return mixed
+     * @return array
      */
     public function changeKeyCase($case = CASE_LOWER);
 
@@ -25,7 +25,7 @@ interface ProxyInterface extends \ArrayAccess, \IteratorAggregate, \Countable
      *
      * @param int $size
      * @param bool $preserve_keys
-     * @return mixed
+     * @return array
      */
     public function chunk($size, $preserve_keys = false);
 
@@ -34,16 +34,21 @@ interface ProxyInterface extends \ArrayAccess, \IteratorAggregate, \Countable
      *
      * @param mixed $column_key
      * @param mixed $index_key
-     * @return mixed[]
+     * @return array
      */
     public function column($column_key, $index_key = null);
 
-
+    /**
+     * Counts all the values of an array
+     *
+     * @return int[]
+     */
+    public function countValues();
 
     /**
      * Return all values (reindexed)
      *
-     * @return mixed[]
+     * @return array
      */
     public function values();
 }
